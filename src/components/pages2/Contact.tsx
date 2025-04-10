@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { collection, addDoc } from "firebase/firestore"; // Firestore functions to interact with the database.
-import { db } from "../../firebase/firebase";// Firebase database instance, imported from configuration.
+import { db } from "../../firebase/firebase"; // Firebase database instance, imported from configuration.
 
 function App() {
   const [step, setStep] = useState(1); // State to manage the current step of the form
@@ -14,7 +14,7 @@ function App() {
     if (step > 1) setStep(step - 1);
   };
 
-  const [details, setDetails] = useState({ 
+  const [details, setDetails] = useState({
     CompanyEmail: "",
     Password: "",
     ConformPassword: "",
@@ -35,7 +35,7 @@ function App() {
     pancardNo: "",
   });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setDetails((prevData) => ({
       ...prevData,
@@ -43,21 +43,24 @@ function App() {
     }));
   };
 
- 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => { //preventDefault: Prevents the default form submission behavior (page reload).
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    //preventDefault: Prevents the default form submission behavior (page reload).
     //async: When you use async before a function, it always returns a Promise and allows the use of await inside it.
     //promise: A promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
-    e.preventDefault(); 
-    
-    try { //      //try: This block contains the code that might throw an error (in this case, addDoc).
+    e.preventDefault();
+
+    try {
+      //  //try: This block contains the code that might throw an error (in this case, addDoc).
       // Add new document to Firestore collection 'details' with user input.
+
       await addDoc(collection(db, "details"), details);
-         //await: await is used inside an async function to pause execution until the Promise is resolved.
-        //Adds a new document to the  collection in Firestore.
-        // Stores the user's input (name, description, imageUrl).
+      //await: await is used inside an async function to pause execution until the Promise is resolved.
+      //Adds a new document to the  collection in Firestore.
+      // Stores the user's input (name, description, imageUrl).
       console.log("Data Added Successfully"); // Log success message.
-    } catch (error) {  //catch: If an error occurs, the catch block executes and logs the error instead of crashing the app.
-            // Handle any errors that might occur
+    } catch (error) {
+      //catch: If an error occurs, the catch block executes and logs the error instead of crashing the app.
+      // Handle any errors that might occur
 
       console.error("Error adding document: ", error); // Log error if submission fails.
     }
@@ -67,8 +70,8 @@ function App() {
 
   return (
     <>
-     <div className="flex flex-col items-center justify-center min-h-screen  p-6">
-     <div className="w-full max-w-lg bg-white shadow-2xl rounded-3xl p-8">
+      <div className="flex flex-col items-center justify-center min-h-screen  p-6">
+        <div className="w-full max-w-lg bg-white shadow-2xl rounded-3xl p-8">
           <div className="flex justify-between mb-4">
             {["Employee Details", "Personal Details", "Documents"].map(
               (label, index) => (
@@ -88,13 +91,13 @@ function App() {
           <div className="border-t border-gray-300 mb-4"></div>
 
           <div className="p-4 overflow-scroll overflow-x-hidden h-96">
-            {step === 1 && ( 
+            {step === 1 && (
               <div>
                 <p className="text-lg font-semibold mb-2 text-center">
                   Employee Details
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                <label className="block font-semibold">
+                  <label className="block font-semibold">
                     CompanyEmail
                     <input
                       type="text"
@@ -104,7 +107,7 @@ function App() {
                       className="w-full p-2 border rounded mt-1 font-normal "
                     />
                   </label>
-                  
+
                   <label className="block font-semibold">
                     Password
                     <input
@@ -135,7 +138,7 @@ function App() {
                       className="w-full p-2 border rounded mt-1 font-normal "
                     />
                   </label>
-                 
+
                   <label className="block font-semibold">
                     Designation
                     <select
@@ -168,7 +171,7 @@ function App() {
                       className="w-full p-2 border rounded mt-1 font-normal"
                     />
                   </label>
-                  
+
                   <label className="block font-semibold">
                     Status
                     <select
@@ -181,7 +184,6 @@ function App() {
                       <option value="Inactive">Inactive</option>
                     </select>
                   </label>
-                  
                 </form>
               </div>
             )}
@@ -191,11 +193,9 @@ function App() {
                   Personal Details
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  
                   <label className="block font-semibold">
                     Address
                     <textarea
-                      
                       name="address"
                       value={details.address}
                       onChange={handleChange}
@@ -259,8 +259,6 @@ function App() {
                       className="w-full p-2 border rounded mt-1 font-normal"
                     />
                   </label>
-
-                  
                 </form>
               </div>
             )}
@@ -276,9 +274,8 @@ function App() {
                       onChange={handleChange}
                       className="w-full p-2 border rounded mt-1 font-normal"
                     />
-                    
                   </label>
-                  
+
                   <label className="block font-semibold">
                     Aadhar Card Url
                     <input
@@ -306,7 +303,6 @@ function App() {
                       onChange={handleChange}
                       className="w-full p-2 border rounded mt-1 font-normal"
                     />
-                   
                   </label>
                   <label className="block font-semibold">
                     PAN Card Number
@@ -352,6 +348,3 @@ function App() {
 }
 
 export default App;
-
-
-

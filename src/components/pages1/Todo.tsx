@@ -8,7 +8,8 @@ interface TodoProps {
   closeModal: () => void; // Function prop to close the modal.
 }
 
-const Todo: React.FC<TodoProps> = ({ closeModal }) => { //A generic type provided by React to define functional components with TypeScript.
+const Todo: React.FC<TodoProps> = ({ closeModal }) => {
+  //A generic type provided by React to define functional components with TypeScript.
   // useState to manage form input data
   const [formData, setFormData] = useState({
     name: "",
@@ -16,23 +17,25 @@ const Todo: React.FC<TodoProps> = ({ closeModal }) => { //A generic type provide
     imageUrl: "",
   });
 
-  
-   // Handles form submission.
-   // Prevents default behavior and submits form data to Firestore.
-   
-  const addSubmit = async (e: React.FormEvent) => { //   //async: When you use async before a function, it always returns a Promise and allows the use of await inside it.
+  // Handles form submission.
+  // Prevents default behavior and submits form data to Firestore.
+
+  const addSubmit = async (e: React.FormEvent) => {
+    //   //async: When you use async before a function, it always returns a Promise and allows the use of await inside it.
     e.preventDefault(); // Prevents page reload on form submission.
 
-    try { //      //try: This block contains the code that might throw an error (in this case, addDoc).
+    try {
+      //      //try: This block contains the code that might throw an error (in this case, addDoc).
       // Add new document to Firestore collection 'formdata' with user input.
       await addDoc(collection(db, "formdata"), formData);
-         //await: await is used inside an async function to pause execution until the Promise is resolved.
-        //Adds a new document to the  collection in Firestore.
-        // Stores the user's input (name, description, imageUrl).
+      //await: await is used inside an async function to pause execution until the Promise is resolved.
+      //Adds a new document to the  collection in Firestore.
+      // Stores the user's input (name, description, imageUrl).
       console.log("Data Added Successfully"); // Log success message.
       closeModal(); // Close modal after successful submission.
-    } catch (error) {  //catch: If an error occurs, the catch block executes and logs the error instead of crashing the app.
-            // Handle any errors that might occur
+    } catch (error) {
+      //catch: If an error occurs, the catch block executes and logs the error instead of crashing the app.
+      // Handle any errors that might occur
 
       console.error("Error adding document: ", error); // Log error if submission fails.
     }
@@ -45,8 +48,6 @@ const Todo: React.FC<TodoProps> = ({ closeModal }) => { //A generic type provide
           <h1 className="text-3xl font-bold text-center text-gray-800">
             Add Data
           </h1>
-
-
 
           {/* Input field for Name */}
           <div>
@@ -62,11 +63,11 @@ const Todo: React.FC<TodoProps> = ({ closeModal }) => { //A generic type provide
               }
               placeholder="Enter Name"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md "
             />
           </div>
-
           
+
           {/* Input field for Description */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -81,9 +82,10 @@ const Todo: React.FC<TodoProps> = ({ closeModal }) => { //A generic type provide
               placeholder="Add description"
               rows={3}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md "
             />
           </div>
+          
 
           {/* Input field for Image URL */}
           <div>
@@ -99,7 +101,7 @@ const Todo: React.FC<TodoProps> = ({ closeModal }) => { //A generic type provide
               }
               placeholder="Enter Image URL"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md "
             />
           </div>
 

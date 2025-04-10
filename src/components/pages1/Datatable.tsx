@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"; // React hooks for state and lifecy
 import { db } from "../../firebase/firebase"; // Firebase database instance.
 import { Data } from "../../type"; // Type definition for data structure.
 import Todo from "./Todo"; // Importing the Todo component for adding new data.
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const DataTable = () => {
   // State to hold the list of todos
@@ -15,11 +15,11 @@ const DataTable = () => {
 
     // Set up real-time listener
     // Real-time data listener: Listens for changes in the "formdata" collection in Firestore.
-    const data = onSnapshot(collection(db, "formdata"), (querySnapshot) => { //The onSnapshot function in Firestore enables real-time data synchronization by listening for changes in a Firestore collection or document.
-
+    const data = onSnapshot(collection(db, "formdata"), (querySnapshot) => {
+      //The onSnapshot function in Firestore enables real-time data synchronization by listening for changes in a Firestore collection or document.
 
       // Maps Firestore documents to an array of objects with the document data and ID.
-      const newData = querySnapshot.docs.map( 
+      const newData = querySnapshot.docs.map(
         (doc) =>
           ({
             ...doc.data(), // Spreads document data to include all fields.
@@ -63,8 +63,6 @@ const DataTable = () => {
         </button>
       </div>
 
-     
-
       {/* Table */}
       <table className="table-auto w-full">
         <thead>
@@ -77,7 +75,6 @@ const DataTable = () => {
           </tr>
         </thead>
 
-     
         <tbody className=" border-collapse  ">
           {todos.map((todo) => (
             <tr
@@ -96,7 +93,6 @@ const DataTable = () => {
                   }`}
                   onClick={() => toggleStatus(todo.id, todo.status)}
                 >
-
                   <div
                     className={`bg-white w-5 h-5 rounded-full shadow-md transform ${
                       todo.status === "active"
@@ -123,19 +119,15 @@ const DataTable = () => {
             </button>
             <Todo closeModal={closeModal} />
           </div>
-          
         </div>
-
       )}
       <div className="mt-5">
-      <Link to="/todocontext" className="hover:text-blue-400  font-bold">View Data</Link>
-
+        <Link to="/todocontext" className="hover:text-blue-400  font-bold">
+          View Data
+        </Link>
       </div>
     </div>
   );
 };
 
 export default DataTable;
-
-
-

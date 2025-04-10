@@ -10,6 +10,8 @@ const Design = () => {
           <li><Link to="/services" className="hover:text-red-600 transition duration-300">Services</Link></li>
           <li><Link to="/contact" className="hover:text-red-600 transition duration-300">Contact</Link></li>
           <li><Link to="/datatable" className="hover:text-red-600 transition duration-300">Datatable</Link></li>
+          <li><Link to="/login" className="hover:text-red-600 transition duration-300">Login</Link></li>
+
         </ul>
       </nav>
       <header className="bg-opacity-90   bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-center py-8 shadow-md">
