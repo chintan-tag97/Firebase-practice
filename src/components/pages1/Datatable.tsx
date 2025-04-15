@@ -123,7 +123,7 @@ const DataTable = () => {
       )}
       <div className="mt-5">
         <Link to="/todocontext" className="hover:text-blue-400  font-bold">
-          View Data
+          View Data 
         </Link>
       </div>
     </div>
